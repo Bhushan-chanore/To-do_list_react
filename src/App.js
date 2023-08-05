@@ -46,9 +46,9 @@ changearray((olditem) =>{
         <button className="btn" onClick={changethings}>+</button>
 
         <ol>
-          {/* <li>{listname}</li> */}
+          {/* <li>{listname}</li>  */}
           {/* to add value below of input field then we used map (array) */}
-           
+           {/* done here work */}
            {
             array.map((itemval , index) =>{
               return(
