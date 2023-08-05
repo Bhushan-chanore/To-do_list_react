@@ -1,25 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { X } from "lucide-react";
+
+const App=()=>{
+
+  const [listname , setlistname] = useState("");
+
+  // for creating and used array
+  const [array , changearray] = useState([]);
+
+  const listEvent = (event) =>{
+    setlistname(event.target.value);
+    // event.target.value = it is used to getting data from input field
+  }
+
+  const  changethings =() =>{
+    changearray((olditem)=>{
+      return([...olditem , listname])
+    })
+
+    // after showing input field must be empty
+    setlistname("");
+  }
+
+
+  const deletitem = (id) =>{
+console.log("delet");
+
+changearray((olditem) =>{
+   return olditem.filter(( _, index)=>{
+
+    return index!==id;
+
+  })
+})
+  }
+  return(
+    <>
+    <div className="main_cont">
+      <div className="center_div">
+
+        <h1 className="heading">TO-DO LIST</h1>
+        <input type="text" placeholder="Enter the Schedule" value={listname} onChange={listEvent}/>
+        <button className="btn" onClick={changethings}>+</button>
+
+        <ol>
+          {/* <li>{listname}</li> */}
+          {/* to add value below of input field then we used map (array) */}
+           
+           {
+            array.map((itemval , index) =>{
+              return(
+                
+               <div className="data" key={index}>
+               <X className="icon" onClick={()=>deletitem(index)}/>
+                <li id={index} key={index}>{itemval}</li>
+               </div>
+                
+              )
+            })
+           }
+
+        </ol>
+
+      </div>
+      </div>
+    </>
+  )
 }
 
 export default App;
+
+
+
+
+
